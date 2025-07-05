@@ -142,3 +142,14 @@ function getBooks() {
 function getBook(id) {
     return data.find((d) => d.id === id);
 }
+
+import React from 'react';
+
+function Script(props) {
+    return (
+        <div></div>
+    );
+}
+
+export default Script;
+
