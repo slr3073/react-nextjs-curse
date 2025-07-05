@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, {css} from "styled-components";
 
 const StyledFormRow = styled.div`
   display: grid;
@@ -20,7 +20,7 @@ const StyledFormRow = styled.div`
 
   &:not(:last-child) {
     border-bottom: ${(props) =>
-      props.orientation === "vertical"
+    props.orientation === "vertical"
         ? "none"
         : "1px solid var(--color-grey-100)"};
   }
@@ -46,14 +46,14 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function FormRow({ label, error, children, orientation }) {
-  return (
-    <StyledFormRow orientation={orientation}>
-      {label && <Label htmlFor={children.props.id}>{label}</Label>}
-      {children}
-      {error && <Error>{error}</Error>}
-    </StyledFormRow>
-  );
+function FormRow({label, error, children, orientation}) {
+    return (
+        <StyledFormRow orientation={orientation}>
+            {label && <Label htmlFor={children.props.id}>{label}</Label>}
+            {children}
+            {error && <Error>{error}</Error>}
+        </StyledFormRow>
+    );
 }
 
 export default FormRow;

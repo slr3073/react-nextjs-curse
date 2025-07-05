@@ -12,4 +12,5 @@ YOUR TASKS:
 - Create a custom provider component `QuizProvider` and provide all the state to the app
 - Create a custom hook to consume state all over the application
 - Delete all unnecessary props
-- IMPORTANT: Note how you actually need state right in App component. This means you need to wrap the whole App into the context (HINT: try in index.js)
+- IMPORTANT: Note how you actually need state right in App component. This means you need to wrap the whole App into the
+  context (HINT: try in index.js)

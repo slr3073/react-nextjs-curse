@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, {css} from "styled-components";
 
 const Form = styled.form`
   ${(props) =>
@@ -23,7 +23,7 @@ const Form = styled.form`
 `;
 
 Form.defaultProps = {
-  type: "regular",
+    type: "regular",
 };
 
 export default Form;

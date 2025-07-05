@@ -14,12 +14,12 @@ const StyledHeader = styled.header`
 `;
 
 function Header() {
-  return (
-    <StyledHeader>
-      <UserAvatar />
-      <HeaderMenu />
-    </StyledHeader>
-  );
+    return (
+        <StyledHeader>
+            <UserAvatar/>
+            <HeaderMenu/>
+        </StyledHeader>
+    );
 }
 
 export default Header;

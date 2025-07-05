@@ -7,7 +7,7 @@ import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 
-import { useMoveBack } from "../../hooks/useMoveBack";
+import {useMoveBack} from "../../hooks/useMoveBack";
 
 const Box = styled.div`
   /* Box */
@@ -18,38 +18,39 @@ const Box = styled.div`
 `;
 
 function CheckinBooking() {
-  const moveBack = useMoveBack();
+    const moveBack = useMoveBack();
 
-  const booking = {};
+    const booking = {};
 
-  const {
-    id: bookingId,
-    guests,
-    totalPrice,
-    numGuests,
-    hasBreakfast,
-    numNights,
-  } = booking;
+    const {
+        id: bookingId,
+        guests,
+        totalPrice,
+        numGuests,
+        hasBreakfast,
+        numNights,
+    } = booking;
 
-  function handleCheckin() {}
+    function handleCheckin() {
+    }
 
-  return (
-    <>
-      <Row type="horizontal">
-        <Heading as="h1">Check in booking #{bookingId}</Heading>
-        <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
-      </Row>
+    return (
+        <>
+            <Row type="horizontal">
+                <Heading as="h1">Check in booking #{bookingId}</Heading>
+                <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
+            </Row>
 
-      <BookingDataBox booking={booking} />
+            <BookingDataBox booking={booking}/>
 
-      <ButtonGroup>
-        <Button onClick={handleCheckin}>Check in booking #{bookingId}</Button>
-        <Button variation="secondary" onClick={moveBack}>
-          Back
-        </Button>
-      </ButtonGroup>
-    </>
-  );
+            <ButtonGroup>
+                <Button onClick={handleCheckin}>Check in booking #{bookingId}</Button>
+                <Button variation="secondary" onClick={moveBack}>
+                    Back
+                </Button>
+            </ButtonGroup>
+        </>
+    );
 }
 
 export default CheckinBooking;

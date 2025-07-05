@@ -4,16 +4,16 @@ import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 
 function Dashboard() {
-  return (
-    <>
-      <Row type="horizontal">
-        <Heading as="h1">Dashboard</Heading>
-        <DashboardFilter />
-      </Row>
+    return (
+        <>
+            <Row type="horizontal">
+                <Heading as="h1">Dashboard</Heading>
+                <DashboardFilter/>
+            </Row>
 
-      <DashboardLayout />
-    </>
-  );
+            <DashboardLayout/>
+        </>
+    );
 }
 
 export default Dashboard;

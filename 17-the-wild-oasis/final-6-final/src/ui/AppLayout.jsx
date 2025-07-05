@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import styled from "styled-components";
@@ -25,17 +25,17 @@ const Container = styled.div`
 `;
 
 function AppLayout() {
-  return (
-    <StyledAppLayout>
-      <Header />
-      <Sidebar />
-      <Main>
-        <Container>
-          <Outlet />
-        </Container>
-      </Main>
-    </StyledAppLayout>
-  );
+    return (
+        <StyledAppLayout>
+            <Header/>
+            <Sidebar/>
+            <Main>
+                <Container>
+                    <Outlet/>
+                </Container>
+            </Main>
+        </StyledAppLayout>
+    );
 }
 
 export default AppLayout;

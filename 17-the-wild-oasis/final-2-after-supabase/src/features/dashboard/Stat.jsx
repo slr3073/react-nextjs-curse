@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { box } from 'styles/styles';
+import {box} from 'styles/styles';
 
 const StyledStat = styled.div`
   ${box}
@@ -46,14 +46,14 @@ const Value = styled.p`
   /* color: var(--color-grey-600); */
 `;
 
-function Stat({ icon, title, value, color }) {
-  return (
-    <StyledStat>
-      <Icon color={color}>{icon}</Icon>
-      <Title>{title}</Title>
-      <Value>{value}</Value>
-    </StyledStat>
-  );
+function Stat({icon, title, value, color}) {
+    return (
+        <StyledStat>
+            <Icon color={color}>{icon}</Icon>
+            <Title>{title}</Title>
+            <Value>{value}</Value>
+        </StyledStat>
+    );
 }
 
 export default Stat;

@@ -15,14 +15,14 @@ const StyledSidebar = styled.aside`
 `;
 
 function Sidebar() {
-  return (
-    <StyledSidebar>
-      <Logo />
-      <MainNav />
+    return (
+        <StyledSidebar>
+            <Logo/>
+            <MainNav/>
 
-      <Uploader />
-    </StyledSidebar>
-  );
+            <Uploader/>
+        </StyledSidebar>
+    );
 }
 
 export default Sidebar;
