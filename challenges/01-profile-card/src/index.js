@@ -32,13 +32,19 @@ function Intro() {
 function SkillList() {
     return (
         <div className="skill-list">
-            <div className="skill" style={{background: "blue"}}>HTML + CSS 👍</div>
-            <div className="skill" style={{background: "red"}}>JavaScript 👍</div>
-            <div className="skill" style={{background: "purple"}}>Web Design 👍</div>
-            <div className="skill" style={{background: "green"}}>Git & GitHub 👍</div>
-            <div className="skill" style={{background: "cyan"}}>React 👍</div>
-            <div className="skill" style={{background: "pink"}}>Angular 👍</div>
+            <Skill text="HTML + CSS" emote="👍" color="blue"/>
+            <Skill text="JavaScript" emote="👍" color="red"/>
+            <Skill text="Web Design" emote="👍" color="purple"/>
+            <Skill text="Git & GitHub" emote="👍" color="green"/>
+            <Skill text="React" emote="👍" color="cyan"/>
+            <Skill text="Angular" emote="👍" color="pink"/>
         </div>
+    )
+}
+
+function Skill(props) {
+    return (
+        <div className="skill" style={{background: props.color}}>{props.text} {props.emote}</div>
     )
 }
 
