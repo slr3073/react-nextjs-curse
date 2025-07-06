@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client"
 import './index.css'
 
-
 const pizzaData = [
     {
         name: "Focaccia",
@@ -59,26 +58,36 @@ const App = () => (
 const Header = () => {
     return (
         <header className="header">
-            <h1 className="header">
-                Fast React Pizza Co.
-            </h1>
+            <h1>Fast React Pizza Co.</h1>
         </header>
     );
 }
 
 const Menu = () => (
-    <div className="menu">
+    <main className="menu">
         <h2>Our Menu</h2>
-        <Pizza name='Focaccia'
-               ingredients='Bread with italian olive oil and rosemary'
-               photoSrc='pizzas/focaccia.jpg'
-               price={10}/>
-        <Pizza name='Pizza Margherita'
-               ingredients='Tomato and mozarella'
-               photoSrc='pizzas/margherita.jpg'
-               price={12}/>
-    </div>
+
+        <ul className="pizzas">
+            {pizzaData.map(pizzaInfo => (
+                <Pizza pizzaInfo={pizzaInfo} key={pizzaInfo.name}/>
+            ))}
+        </ul>
+    </main>
 )
+
+const Pizza = (props) => {
+    const pizzaInfo = props.pizzaInfo;
+    return (
+        <li className="pizza">
+            <img src={pizzaInfo.photoName} alt={pizzaInfo.name}/>
+            <div>
+                <h3>{pizzaInfo.name}</h3>
+                <p>{pizzaInfo.ingredients}</p>
+                <span>{pizzaInfo.price}</span>
+            </div>
+        </li>
+    )
+}
 
 const Footer = () => {
     const hour = new Date().getHours()
@@ -98,18 +107,6 @@ const Footer = () => {
         </footer>
     )
     //React.createElement('footer', null, "We're currently open")
-}
-
-const Pizza = (props) => {
-    console.log(props)
-    return (
-        <div className="pizza">
-            <img src={props.photoSrc} alt={props.name}/>
-            <h3>{props.name}</h3>
-            <p>{props.ingredients}</p>
-            <span>{props.price}</span>
-        </div>
-    )
 }
 
 
