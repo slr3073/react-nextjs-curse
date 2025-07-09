@@ -79,8 +79,7 @@ const Menu = () => (
     </main>
 )
 
-const Pizza = (props) => {
-    const pizzaInfo = props.pizzaInfo;
+const Pizza = ({pizzaInfo}) => {
     if (pizzaInfo.soldOut) return null
 
     return (
@@ -104,18 +103,18 @@ const Footer = () => {
 
     return (
         <footer className="footer">
-            {isOpen ? <Order/> :
+            {isOpen ? <Order closeHour={closeHour} openHour={openHour}/> :
                 <p>We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>}
         </footer>
     )
     //React.createElement('footer', null, "We're currently open")
 }
 
-const Order = () => {
+const Order = ({closeHour, openHour}) => {
     return (
         <div className="order">
             <p>
-                We're open until {closeHour}: 00. Come visit us or order online.
+                We're open from {openHour}:00 to {closeHour}: 00. Come visit us or order online.
             </p>
             <button className="btn">Order</button>
         </div>
