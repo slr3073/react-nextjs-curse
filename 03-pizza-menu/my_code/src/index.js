@@ -67,16 +67,22 @@ const Menu = () => (
     <main className="menu">
         <h2>Our Menu</h2>
 
-        <ul className="pizzas">
-            {pizzaData.map(pizzaInfo => (
-                <Pizza pizzaInfo={pizzaInfo} key={pizzaInfo.name}/>
-            ))}
-        </ul>
+        {pizzaData.length > 0 ? (
+            <ul className="pizzas">
+                {pizzaData.map(pizzaInfo => (
+                    <Pizza pizzaInfo={pizzaInfo} key={pizzaInfo.name}/>
+                ))}
+            </ul>
+        ) : (
+            <p>We 're still working on our menu. Please come back later :</p>
+        )}
     </main>
 )
 
 const Pizza = (props) => {
     const pizzaInfo = props.pizzaInfo;
+    if (pizzaInfo.soldOut) return null
+
     return (
         <li className="pizza">
             <img src={pizzaInfo.photoName} alt={pizzaInfo.name}/>
@@ -96,17 +102,24 @@ const Footer = () => {
     const isOpen = hour >= openHour && hour <= closeHour
     console.log(isOpen)
 
-    // if (isOpen)
-    //     alert("We're currently open !")
-    // else
-    //     alert("Sorry we're closed")
-
     return (
         <footer className="footer">
-            {new Date().toLocaleTimeString()}. We're currently open
+            {isOpen ? <Order/> :
+                <p>We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>}
         </footer>
     )
     //React.createElement('footer', null, "We're currently open")
+}
+
+const Order = () => {
+    return (
+        <div className="order">
+            <p>
+                We're open until {closeHour}: 00. Come visit us or order online.
+            </p>
+            <button className="btn">Order</button>
+        </div>
+    )
 }
 
 
