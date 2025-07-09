@@ -68,11 +68,17 @@ const Menu = () => (
         <h2>Our Menu</h2>
 
         {pizzaData.length > 0 ? (
-            <ul className="pizzas">
-                {pizzaData.map(pizzaInfo => (
-                    <Pizza pizzaInfo={pizzaInfo} key={pizzaInfo.name}/>
-                ))}
-            </ul>
+            <>
+                <p>
+                    Authentic Italian cuisine & creative dishes to choose from. All from
+                    our stone oven, all organic, all delicious
+                </p>
+                <ul className="pizzas">
+                    {pizzaData.map(pizzaInfo => (
+                        <Pizza pizzaInfo={pizzaInfo} key={pizzaInfo.name}/>
+                    ))}
+                </ul>
+            </>
         ) : (
             <p>We 're still working on our menu. Please come back later :</p>
         )}
@@ -80,15 +86,16 @@ const Menu = () => (
 )
 
 const Pizza = ({pizzaInfo}) => {
-    if (pizzaInfo.soldOut) return null
+    // if (pizzaInfo.soldOut) return null
 
     return (
-        <li className="pizza">
+        // <li className={"pizza " + (pizzaInfo.soldOut ? "sold-out" : "")}>
+        <li className={`pizza ${pizzaInfo.soldOut ? "sold-out" : ""}`}>
             <img src={pizzaInfo.photoName} alt={pizzaInfo.name}/>
-            <div>
+            <div>x
                 <h3>{pizzaInfo.name}</h3>
                 <p>{pizzaInfo.ingredients}</p>
-                <span>{pizzaInfo.price}</span>
+                <span>{pizzaInfo.soldOut ? 'Sold out' : pizzaInfo.price}</span>
             </div>
         </li>
     )
