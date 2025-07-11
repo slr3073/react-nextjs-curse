@@ -2,6 +2,34 @@ import {StrictMode} from "react";
 import {createRoot} from "react-dom/client";
 import "./styles.css";
 
+const skills = [
+    {
+        name: "HTML + CSS",
+        level: "advanced",
+        color: "blue"
+    },
+    {
+        name: "JavaScript",
+        level: "medium",
+        color: "red"
+    },
+    {
+        name: "Git & GitHub",
+        level: "advanced",
+        color: "purple"
+    },
+    {
+        name: "Angular",
+        level: "medium",
+        color: "green"
+    },
+    {
+        name: "React",
+        level: "beginner",
+        color: "orange"
+    },
+]
+
 function App() {
     return (
         <div className="card">
@@ -32,19 +60,21 @@ function Intro() {
 function SkillList() {
     return (
         <div className="skill-list">
-            <Skill text="HTML + CSS" emote="👍" color="blue"/>
-            <Skill text="JavaScript" emote="👍" color="red"/>
-            <Skill text="Web Design" emote="👍" color="purple"/>
-            <Skill text="Git & GitHub" emote="👍" color="green"/>
-            <Skill text="React" emote="👍" color="cyan"/>
-            <Skill text="Angular" emote="👍" color="pink"/>
+            {skills.map(skill => <Skill name={skill.name} color={skill.color} level={skill.level}/>)}
         </div>
     )
 }
 
-function Skill(props) {
+function Skill({name, color, level}) {
+    function getEmote(){
+        if (level === "beginner") return  "👶"
+        if (level === "medium") return "👍"
+        return "💪"
+    }
     return (
-        <div className="skill" style={{background: props.color}}>{props.text} {props.emote}</div>
+        <div className="skill" style={{background: color}}>
+            {name} {getEmote()}
+        </div>
     )
 }
 
