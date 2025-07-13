@@ -19,13 +19,12 @@ export default function App() {
     return (
         <>
             <div className="centered">
-                <button onClick={() => setStep((step) => step - 1)}>-</button>
-                {`Step: ${step}`}
-                <button onClick={() => setStep((step) => step + 1)}>+</button>
+                <input type="range" min="1" max="10" value={step} onChange={e => setStep(Number(e.target.value))}/>
+                <span>{step}</span>
             </div>
             <div className="centered">
                 <button onClick={handleCountDown}>-</button>
-                {`Count: ${count}`}
+                <input type="number" value={count} onChange={e => setCount(Number(e.target.value))}/>
                 <button onClick={handleCountUp}>+</button>
             </div>
             <div className="centered">
@@ -33,6 +32,18 @@ export default function App() {
                 {count < 0 && `${Math.abs(count)} days ago it was: ${date.toDateString()}`}
                 {count > 0 && `${count} days from now it will be: ${date.toDateString()}`}
             </div>
+            {
+                (step !== 1 || count !== 0) &&
+                <div className="centered">
+                    <button onClick={() => {
+                        setStep(1)
+                        setCount(0)
+                    }}>
+                        Reset
+                    </button>
+                </div>
+            }
+
         </>
     )
 }
