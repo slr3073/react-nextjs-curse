@@ -1,13 +1,13 @@
 import {useState} from "react";
 
 export default function App() {
-    const [bill, setBill] = useState(100)
+    const [bill, setBill] = useState(0)
     const [customersTipsPercentage, setCustomersTipsPercentage] = useState([0, 0])
     const tipsAmount = customersTipsPercentage.length > 0 ?
         (customersTipsPercentage.reduce((acc, e) => acc + e) * bill) : 0
 
     function handleReset() {
-        setBill(100)
+        setBill(0)
         setCustomersTipsPercentage([0, 0])
     }
 
@@ -16,7 +16,6 @@ export default function App() {
     }
 
     function handleChangeTips(id, amount) {
-        console.log("amount : ", amount)
         const newArray = customersTipsPercentage.slice()
         newArray[id] = amount
         setCustomersTipsPercentage(() => newArray)
@@ -24,7 +23,7 @@ export default function App() {
 
     return (
         <>
-            <BillAmount bill={bill} onChangeBill={handleChangeBill}>How much was the bill ? </BillAmount>
+            <BillAmount bill={bill} onChangeBill={handleChangeBill}/>
             <CustomerRating id={0} amount={customersTipsPercentage[0]} onChangeTips={handleChangeTips}>How did you like
                 the service ?</CustomerRating>
             <CustomerRating id={1} amount={customersTipsPercentage[1]} onChangeTips={handleChangeTips}>How did your
@@ -35,10 +34,10 @@ export default function App() {
     )
 }
 
-function BillAmount({bill, onChangeBill, children}) {
+function BillAmount({bill, onChangeBill}) {
     return (
         <div style={{"padding": "10px"}}>
-            <span>{children}</span>
+            <span>How much was the bill ?</span>
             <input
                 type="number"
                 value={bill}
@@ -69,8 +68,9 @@ function Button({onReset, children}) {
 }
 
 function FinalBill({bill, tipsAmount}) {
+    if(bill<=0) return null
     return (
-        <h1>{`You should pay ${'$' + (bill + tipsAmount)} (${'$' + bill} + ${'$' + tipsAmount})`}</h1>
+        <h1>{`You should pay ${'$' + (bill + tipsAmount)} (${'$' + bill} + ${'$' + Math.round(tipsAmount)})`}</h1>
     )
 }
 
