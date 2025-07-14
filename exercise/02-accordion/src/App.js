@@ -28,23 +28,57 @@ export default function App() {
 }
 
 function Accordion({data}) {
+    const [openItemId, setOpenItemId] = useState(1)
+
+    function handleToggle(itemId){
+        if (openItemId === itemId){
+            setOpenItemId(undefined)
+            return
+        }
+
+        setOpenItemId(itemId)
+
+    }
+
     return (
         <div className="accordion">
-            {data.map((e, i) => <Item num={e.num} title={e.title} text={e.text} num={i} key={i}/>)}
+            {data.map((e, i) =>
+                <Item
+                    title={e.title}
+                    num={i}
+                    key={i}
+                    openItemId={openItemId}
+                    onClick={() => handleToggle(i)}
+                >
+                    {e.text}
+                </Item>
+            )}
+            <Item
+                title="Test 1"
+                num={22}
+                openItemId={openItemId}
+                onClick={() => handleToggle(22)}
+            >
+                <p>Allows React developers to :</p>
+                <ul>
+                    <li>Break up UI into components</li>
+                    <li>Make components reusable</li>
+                    <li>Place state efficiently</li>
+                </ul>
+            </Item>
         </div>
     )
 }
 
-function Item({num, title, text}) {
-
-    const [isOpen, setIsOpen] = useState(false)
+function Item({num, title, openItemId, onClick, children}) {
+    const isOpen = openItemId === num
 
     return (
-        <div className={`item ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
-            <p className="number">{num < 9 ? `0${num+1}` : num + 1 }</p>
+        <div className={`item ${isOpen ? "open" : ""}`} onClick={onClick}>
+            <p className="number">{num < 9 ? `0${num + 1}` : num + 1}</p>
             <p className="title">{title}</p>
             <p className="icon">{isOpen ? "-" : "+"}</p>
-            {isOpen && <div className="content-box">{text}</div>}
+            {isOpen && <div className="content-box">{children}</div>}
         </div>
     )
 }
