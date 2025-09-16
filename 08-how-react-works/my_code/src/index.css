@@ -32,7 +32,7 @@ button {
 
 .tab {
     border-radius: 12px;
-    background-color: #edf2ff;
+    background-color: lightgrey;
     padding: 12px 24px;
     margin-right: 8px;
     font-size: 16px;
@@ -48,7 +48,7 @@ button {
 }
 
 .tab-content {
-    background-color: #edf2ff;
+    background-color: lightgrey;
     padding: 32px;
     border-radius: 12px;
 }
