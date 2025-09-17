@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 const tempMovieData = [
     {
@@ -50,24 +50,9 @@ const tempWatchedData = [
 const average = (arr) =>
     arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-const KEY = 'd4aa5ca4' // shouldnt be in clear
-
 export default function App() {
-    const [movies, setMovies] = useState([]);
-    const [watched, setWatched] = useState([]);
-    const [isLoading, setIsLoading] = useState(false)
-    const query = "interstellar"
-
-    useEffect(function () {
-        async function fetchMovies() {
-            setIsLoading(true)
-            const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`)
-            const data = await res.json()
-            setMovies(data.Search)
-            setIsLoading(false)
-        }
-        fetchMovies()
-    }, [])
+    const [movies, setMovies] = useState(tempMovieData);
+    const [watched, setWatched] = useState(tempWatchedData);
 
     return (
         <>
@@ -77,9 +62,7 @@ export default function App() {
             </NavBar>
             <Main>
                 <Box>
-                    {isLoading ?  <Loader/>
-                        : <MovieList movies={movies}/>
-                    }
+                    <MovieList movies={movies}/>
                 </Box>
                 <Box>
                     <Summary watched={watched}/>
@@ -88,10 +71,6 @@ export default function App() {
             </Main>
         </>
     );
-}
-
-function Loader(){
-    return <p className="loader">Loading...</p>
 }
 
 function NavBar({children}) {
@@ -182,12 +161,12 @@ function Movie({movie}) {
     )
 }
 
-function Summary({watched}) {
+function Summary({watched}){
     const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
     const avgUserRating = average(watched.map((movie) => movie.userRating));
     const avgRuntime = average(watched.map((movie) => movie.runtime));
 
-    return (
+    return(
         <div className="summary">
             <h2>Movies you watched</h2>
             <div>
@@ -216,13 +195,13 @@ function WatchedMovieList({watched}) {
     return (
         <ul className="list">
             {watched.map((movie) => (
-                <WatchedMovie key={movie.imdbID} movie={movie}/>
+                <WatchedMovie movie={movie}/>
             ))}
         </ul>
     )
 }
 
-function WatchedMovie({movie}) {
+function WatchedMovie({movie}){
     return (
         <li key={movie.imdbID}>
             <img src={movie.Poster} alt={`${movie.Title} poster`}/>
