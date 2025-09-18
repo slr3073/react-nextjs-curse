@@ -46,11 +46,13 @@ export default function App() {
     }
 
     useEffect(function () {
+        const controller = new AbortController()
+
         async function fetchMovies() {
             try {
                 setIsLoading(true)
                 setError(undefined)
-                const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`)
+                const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`, {signal: controller.signal})
                 if (!res.ok) throw new Error("Something went wrong.")
 
                 const data = await res.json()
@@ -59,6 +61,8 @@ export default function App() {
                 setMovies(data.Search)
             } catch (err) {
                 console.error(err.message)
+                if(err.name === "AbortError") return
+
                 setError(err.message)
             } finally {
                 setIsLoading(false)
@@ -71,6 +75,10 @@ export default function App() {
             return
         }
         fetchMovies()
+
+        return function () {
+            controller.abort()
+        }
     }, [query])
 
     return (
@@ -273,6 +281,16 @@ function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
 
         getMovieDetails()
     }, [selectedId]);
+
+    useEffect(() => {
+        if (!title) return
+        document.title = `Movie "${title}"`
+
+        return (() => {
+            document.title = "usePopcorn"
+            console.log(`Cleanup function for movie ${title}`)
+        })
+    }, [title]);
 
     return (
         <div className="details">
