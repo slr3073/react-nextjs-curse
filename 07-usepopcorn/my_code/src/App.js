@@ -11,7 +11,7 @@ export default function App() {
     const [watched, setWatched] = useState([]);
 
     const [isLoading, setIsLoading] = useState(false)
-    const [query, setQuery] = useState("inception");
+    const [query, setQuery] = useState("");
     const [error, setError] = useState()
     const [selectedId, setSelectedId] = useState()
 
@@ -60,7 +60,6 @@ export default function App() {
 
                 setMovies(data.Search)
             } catch (err) {
-                console.error(err.message)
                 if(err.name === "AbortError") return
 
                 setError(err.message)
@@ -74,6 +73,8 @@ export default function App() {
             setError(undefined)
             return
         }
+
+        handleCloseMovie()
         fetchMovies()
 
         return function () {
@@ -271,6 +272,17 @@ function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
     }
 
     useEffect(() => {
+        function callback(e) {
+            if (e.code === "Escape") {
+                onCloseMovie()
+            }
+        }
+        document.addEventListener("keydown", callback);
+
+        return () => document.removeEventListener("keydown", callback)
+    }, [onCloseMovie]);
+
+    useEffect(() => {
         async function getMovieDetails() {
             setIsLoading(true)
             const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`)
@@ -288,7 +300,7 @@ function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
 
         return (() => {
             document.title = "usePopcorn"
-            console.log(`Cleanup function for movie ${title}`)
+            // console.log(`Cleanup function for movie ${title}`)
         })
     }, [title]);
 
