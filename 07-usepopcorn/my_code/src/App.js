@@ -14,7 +14,7 @@ import {Summary} from "./components/Summary";
 const KEY = 'd4aa5ca4' // shouldnt be in clear
 export default function App() {
     const [movies, setMovies] = useState([]);
-    const [watched, setWatched] = useState([]);
+    const [watched, setWatched] = useState(() => JSON.parse(localStorage.getItem("watched")));
 
     const [isLoading, setIsLoading] = useState(false)
     const [query, setQuery] = useState("");
@@ -31,6 +31,8 @@ export default function App() {
 
     function handleAddWatch(movie) {
         setWatched([...watched, movie])
+
+        // localStorage.setItem('watched', JSON.stringify([...watched, movie]))
     }
 
     function handleDeleteWatched(movie) {
@@ -74,6 +76,10 @@ export default function App() {
         }
     }, [query])
 
+    useEffect(() => {
+        localStorage.setItem('watched', JSON.stringify(watched))
+    }, [watched]);
+
     return (
         <>
             <NavBar>
@@ -95,9 +101,7 @@ export default function App() {
                                 <Summary watched={watched}/>
                                 <WatchedMovieList watched={watched} onDeleteWatched={handleDeleteWatched}/>
                             </>
-
                     }
-
                 </Box>
             </Main>
         </>

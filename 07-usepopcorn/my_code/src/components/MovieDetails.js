@@ -7,6 +7,7 @@ export function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
     const [movie, setMovie] = useState({})
     const [userRating, setUserRating] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
+    // const [avgRating, setAvgRating] = useState(0)
     const foundWatched = watched.find(watchedMovie => watchedMovie.imdbID === selectedId)
 
     const {
@@ -21,20 +22,6 @@ export function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
         Director: director,
         Genre: genre
     } = movie
-
-    function handleAdd() {
-        const newWatchedMovie = {
-            imdbID: selectedId,
-            title,
-            year,
-            poster,
-            imdbRating: Number(imdbRating),
-            userRating,
-            runtime: Number(runtime.split(' ').at(0))
-        }
-        onAddWatch(newWatchedMovie)
-        onCloseMovie()
-    }
 
     useEffect(() => {
         function callback(e) {
@@ -69,6 +56,26 @@ export function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
         })
     }, [title]);
 
+    function handleAdd() {
+        const newWatchedMovie = {
+            imdbID: selectedId,
+            title,
+            year,
+            poster,
+            imdbRating: Number(imdbRating),
+            userRating,
+            runtime: Number(runtime.split(' ').at(0))
+        }
+        onAddWatch(newWatchedMovie)
+        onCloseMovie()
+
+        // setAvgRating(Number(imdbRating))
+        // console.log(avgRating, userRating)
+
+        // setAvgRating((avgRating + userRating) / 2) // wrong it will always do "0/by userRating"
+        // setAvgRating((avgRating) => (avgRating + userRating) / 2) // right way
+    }
+
     return (
         <div className="details">
             {isLoading
@@ -84,6 +91,7 @@ export function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
                             <p><span>⭐</span>{imdbRating} IMDb rating</p>
                         </div>
                     </header>
+                    {/*<p>{avgRating}</p>*/}
 
                     <section>
                         <div className="rating">
