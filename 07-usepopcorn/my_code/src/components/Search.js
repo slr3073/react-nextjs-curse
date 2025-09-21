@@ -1,4 +1,13 @@
+import {useEffect} from "react";
+
 export function Search({query, setQuery}) {
+
+    useEffect(() => {
+        const el = document.querySelector(".search")
+        console.log(el)
+        el.focus()
+    }, []);
+
     return (
         <input
             className="search"
