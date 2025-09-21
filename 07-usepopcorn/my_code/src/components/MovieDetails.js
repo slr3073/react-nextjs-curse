@@ -9,7 +9,7 @@ export function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
     const [isLoading, setIsLoading] = useState(false)
     // const [avgRating, setAvgRating] = useState(0)
     const countRef = useRef(0);
-git
+
     const foundWatched = watched.find(watchedMovie => watchedMovie.imdbID === selectedId)
 
     const {
