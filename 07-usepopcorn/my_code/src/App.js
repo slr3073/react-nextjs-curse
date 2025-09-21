@@ -11,10 +11,12 @@ import {MovieList} from "./components/MovieList";
 import {MovieDetails} from "./components/MovieDetails";
 import {Summary} from "./components/Summary";
 import {useMovies} from "./hooks/useMovies";
+import {useLocalStorageState} from "./hooks/useLocalStorageState";
 
 const KEY = 'd4aa5ca4' // shouldnt be in clear
 export default function App() {
-    const [watched, setWatched] = useState(() => JSON.parse(localStorage.getItem("watched")));
+    // const [watched, setWatched] = useState(() => JSON.parse(localStorage.getItem("watched")));
+    const [watched, setWatched] = useLocalStorageState([], "watched")
     const [query, setQuery] = useState("");
     const [selectedId, setSelectedId] = useState()
     const {movies, isLoading, error} = useMovies(query)
@@ -36,10 +38,6 @@ export default function App() {
     function handleDeleteWatched(movie) {
         setWatched((watched) => watched.filter((watchedMovie) => movie !== watchedMovie))
     }
-
-    useEffect(() => {
-        localStorage.setItem('watched', JSON.stringify(watched))
-    }, [watched]);
 
     return (
         <>
