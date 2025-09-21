@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Loader from "./Loader";
 import StarRating from "./StarRating";
 
@@ -8,6 +8,8 @@ export function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
     const [userRating, setUserRating] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
     // const [avgRating, setAvgRating] = useState(0)
+    const countRef = useRef(0);
+git
     const foundWatched = watched.find(watchedMovie => watchedMovie.imdbID === selectedId)
 
     const {
@@ -22,6 +24,10 @@ export function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
         Director: director,
         Genre: genre
     } = movie
+
+    useEffect(() => {
+        if(userRating) countRef.current++
+    }, [userRating]);
 
     useEffect(() => {
         function callback(e) {
@@ -64,7 +70,8 @@ export function MovieDetails({selectedId, onCloseMovie, onAddWatch, watched}) {
             poster,
             imdbRating: Number(imdbRating),
             userRating,
-            runtime: Number(runtime.split(' ').at(0))
+            runtime: Number(runtime.split(' ').at(0)),
+            countRatingDecisions: countRef.current
         }
         onAddWatch(newWatchedMovie)
         onCloseMovie()
